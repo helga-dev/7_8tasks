@@ -101,8 +101,31 @@ public class ReflectionDemo {
 
         return listOfGettersAndSetters;
     }
-}
 
+    /**
+     * Напишите интерфейс Executable с методом
+     * void execute();
+     * <p>
+     * Напишите метод, который для списка объектов находит его элементы, реализующие этот
+     * интерфейс, и выполняет в таких объектах метод execute(). Метод возвращает количество
+     * найденных элементов.
+     */
+
+    public static int countIExecutableImplemented(List<Object> objectList) {
+        if(objectList == null) throw new IllegalArgumentException("objectList is null");
+        int count = 0;
+
+        for (Object elem : objectList) {
+            if (elem instanceof IExecutable) {
+                //elem.execute()
+                ((IExecutable) elem).execute();
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
 
 
 //TODO: тесты на 5*

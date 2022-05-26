@@ -1,2 +1,5 @@
-package com.company;public interface IExecutable {
+package com.company;
+
+public interface IExecutable {
+    void execute();
 }

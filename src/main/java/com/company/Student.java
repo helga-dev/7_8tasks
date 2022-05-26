@@ -40,4 +40,6 @@ public class Student extends Human {
     public int hashCode() {
         return Objects.hash(super.hashCode(), faculty);
     }
+
+
 }

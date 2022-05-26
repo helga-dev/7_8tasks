@@ -14,19 +14,19 @@ import static com.company.ReflectionDemo.*;
 
 public class ReflectionDemoTest {
     @Test(expected = IllegalArgumentException.class)
-    public void testNullListGetNumInstanceOfHuman(){
+    public void testNullListGetNumInstanceOfHuman() {
         getNumInstanceOfHuman(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testEmptyListGetNumInstanceOfHuman(){
+    public void testEmptyListGetNumInstanceOfHuman() {
         List<Object> someList = new ArrayList<>();
         getNumInstanceOfHuman(someList);
 
     }
 
     @Test
-    public void testGetNumInstanceOfHuman(){
+    public void testGetNumInstanceOfHuman() {
         List<Object> someList = new ArrayList<>();
         Human h1 = new Human();
         Human h2 = new Human();
@@ -37,8 +37,9 @@ public class ReflectionDemoTest {
         Assertions.assertEquals(3, getNumInstanceOfHuman(someList));
 
     }
+
     @Test
-    public void testGetNumInstanceOfHumanZero(){
+    public void testGetNumInstanceOfHumanZero() {
         List<Object> someList = new ArrayList<>();
 
         Person p1 = new Person();
@@ -52,14 +53,14 @@ public class ReflectionDemoTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetListOfPublicMethodsNullObj(){
+    public void testGetListOfPublicMethodsNullObj() {
         getListOfPublicMethods(null);
     }
 
     @Test
-    public void testGetListOfPublicMethods(){
+    public void testGetListOfPublicMethods() {
         List<String> expected = new ArrayList<>();
-        Collections.addAll(expected,"equals", "hashCode", "getFaculty", "setFaculty");
+        Collections.addAll(expected, "equals", "hashCode", "getFaculty", "setFaculty");
         Student s1 = new Student();
         List<String> actual = getListOfPublicMethods(s1);
         actual.sort(String::compareTo);
@@ -69,12 +70,12 @@ public class ReflectionDemoTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetListOfSuperclassesNullObj(){
+    public void testGetListOfSuperclassesNullObj() {
         getListOfSuperclasses(null);
     }
 
     @Test
-    public void testGetListOfSuperclasses(){
+    public void testGetListOfSuperclasses() {
         Student s = new Student();
         List<String> expected = new ArrayList<>();
         Collections.addAll(expected, "Object", "Human");
@@ -84,11 +85,48 @@ public class ReflectionDemoTest {
     }
 
     @Test
-    public void testGetListOfSuperclassesOfObject(){
+    public void testGetListOfSuperclassesOfObject() {
         List<String> expected = new ArrayList<>();
         Object obj = new Object();
         List<String> actual = getListOfSuperclasses(obj);
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetListOfGettersAndSettersNullObj() {
+        getListOfGettersAndSetters(null);
+    }
+
+    @Test
+    public void testGetListOfGettersAndSetters() {
+        List<String> expected = new ArrayList<>();
+        Collections.addAll(expected, "getFaculty", "setFaculty");
+        expected.sort(String::compareTo);
+        Student st = new Student();
+        List<String> actual = getListOfGettersAndSetters(st);
+        actual.sort(String::compareTo);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCountIExecutableImplementedNullList() {
+        countIExecutableImplemented(null);
+    }
+
+    @Test
+    public void testCountIExecutableImplemented() {
+
+        List<Object> objectList = new ArrayList<>();
+        Human h1 = new Human();
+        Human h2 = null;
+        Student st1 = new Student();
+        MyClass myClass1 = new MyClass();
+        MyClass myClass2 = new MyClass();
+        Collections.addAll(objectList, h1, h2, st1, myClass1, myClass2);
+        int expected = 2;
+        int actual = countIExecutableImplemented(objectList);
+        Assertions.assertEquals(expected, actual);
+    }
+
 
 }
